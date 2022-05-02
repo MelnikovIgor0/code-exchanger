@@ -11,6 +11,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using code_exchanger_back.Models;
+using Microsoft.EntityFrameworkCore;
+using System.IO;
+using System.Configuration;
 
 namespace code_exchanger_back
 {
@@ -32,6 +36,8 @@ namespace code_exchanger_back
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "code_exchanger_back", Version = "v1" });
             });
+            services.AddDbContext<DataBaseContext>(option => option.UseNpgsql(
+                ConfigrationManage.Configuration.GetConnectionString("PostgreSql")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +60,16 @@ namespace code_exchanger_back
             {
                 endpoints.MapControllers();
             });
+        }
+
+        public class ConfigrationManage
+        {
+            public readonly static IConfiguration Configuration;
+            static ConfigrationManage()
+            {
+                Configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).
+                    AddJsonFile("appsettings.json", optional: true).Build();
+            }
         }
     }
 }
