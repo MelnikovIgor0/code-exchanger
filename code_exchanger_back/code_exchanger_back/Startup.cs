@@ -37,7 +37,7 @@ namespace code_exchanger_back
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "code_exchanger_back", Version = "v1" });
             });
             services.AddDbContext<DataBaseContext>(option => option.UseNpgsql(
-                ConfigrationManage.Configuration.GetConnectionString("PostgreSql")));
+                ConfigrationManage.Configuration.GetConnectionString("User ID = postgres; Password = 123456; Host = localhost; Port = 5432; Database = database")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +65,7 @@ namespace code_exchanger_back
         public class ConfigrationManage
         {
             public readonly static IConfiguration Configuration;
+
             static ConfigrationManage()
             {
                 Configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).

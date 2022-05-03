@@ -7,16 +7,20 @@ namespace code_exchanger_back.Models
     {
         public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options)
         {
-            base.Update(this.Database);
         }
 
-        public DbSet<Users> users { get; set; }
+        public DbSet<User> users { get; set; }
 
         public DbSet<Content> content { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql("User ID = postgres; Password = 123456; Host = localhost; Port = 5432; Database = database");
         }
     }
 }

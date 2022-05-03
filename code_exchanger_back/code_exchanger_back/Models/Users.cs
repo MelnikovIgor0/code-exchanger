@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace code_exchanger_back.Models
 {
-    public class Users
+    public class User
     {
         [Key]
         public ulong ID { get; set; }
@@ -14,5 +14,10 @@ namespace code_exchanger_back.Models
         public string username { get; set; }
 
         public byte[] password { get; set; }
+
+        public override string ToString()
+        {
+            return $"User: {ID}; {username}";
+        }
     }
 }
