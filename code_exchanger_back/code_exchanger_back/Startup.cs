@@ -15,6 +15,7 @@ using code_exchanger_back.Models;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System.Configuration;
+using code_exchanger_back.Services;
 
 namespace code_exchanger_back
 {
@@ -36,8 +37,7 @@ namespace code_exchanger_back
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "code_exchanger_back", Version = "v1" });
             });
-            services.AddDbContext<DataBaseContext>(option => option.UseNpgsql(
-                ConfigrationManage.Configuration.GetConnectionString("User ID = postgres; Password = 123456; Host = localhost; Port = 5432; Database = database")));
+            services.AddSingleton<DBConnector>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

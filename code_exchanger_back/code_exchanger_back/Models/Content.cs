@@ -10,17 +10,17 @@ namespace code_exchanger_back.Models
     {
         public string code { get; set; }
 
-        public DateTime creation_time { get; set; }
+        public object creation_time { get; set; }
 
-        public ulong authorID { get; set; }
+        public long authorID { get; set; }
 
         public string link { get; set; }
 
         public byte language { get; set; }
 
-        public byte[] password { get; set; }
+        public byte[][] password { get; set; }
 
         [Key]
-        public ulong ID { get; set; }
+        public long ID { get; set; }
     }
 }

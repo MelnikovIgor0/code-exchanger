@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using code_exchanger_back.Models;
+using static code_exchanger_back.Startup;
+using Microsoft.Extensions.Configuration;
 
 namespace code_exchanger_back.Models
 {
@@ -16,7 +18,7 @@ namespace code_exchanger_back.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("User ID = postgres; Password = 123456; Host = localhost; Port = 5432; Database = database");
+            optionsBuilder.UseNpgsql(ConfigrationManage.Configuration.GetConnectionString("PostgreSql"));
         }
     }
 }
