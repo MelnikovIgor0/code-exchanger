@@ -21,7 +21,7 @@ namespace code_exchanger_back.Controllers
         {
             MainDataBase.Database.OpenConnection();
             var con = (Npgsql.NpgsqlConnection)MainDataBase.Database.GetDbConnection();
-            object data = (new NpgsqlCommand($"SELECT \"username\" FROM \"Users\" WHERE \"ID\"={id}", con)).ExecuteScalar();
+            string data = (string)(new NpgsqlCommand($"SELECT \"username\" FROM \"Users\" WHERE \"ID\"={id}", con)).ExecuteScalar();
             return Ok(data.ToString());
         }
     }

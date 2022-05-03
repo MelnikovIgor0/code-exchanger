@@ -9,10 +9,6 @@ namespace code_exchanger_back.Models
         {
         }
 
-        public DbSet<User> users { get; set; }
-
-        public DbSet<Content> content { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

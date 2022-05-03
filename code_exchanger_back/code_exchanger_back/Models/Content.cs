@@ -14,6 +14,8 @@ namespace code_exchanger_back.Models
 
         public ulong authorID { get; set; }
 
+        public string link { get; set; }
+
         public byte language { get; set; }
 
         public byte[] password { get; set; }
