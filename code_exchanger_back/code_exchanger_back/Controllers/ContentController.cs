@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using code_exchanger_back.Services;
+using System.Security.Cryptography;
 
 namespace code_exchanger_back.Controllers
 {
@@ -21,9 +22,18 @@ namespace code_exchanger_back.Controllers
         }
 
         [HttpPost("create/{content}")]
-        public IActionResult CreateRecord(string content)
+        public IActionResult CreateRecord(string content, [FromQuery] short language, [FromQuery] string password)
         {
-            string link = dBConnector.CreateRecord(content, CRATCHID++, 1, 0, null);
+            if (password is not null)
+            {
+                bool ok = true;
+                foreach (char c in password)
+                    if (!(c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z' || c >= '0' && c <= '9'))
+                        ok = false;
+                if (!ok) return BadRequest("password contains prohibited characters");
+            }
+            string link = dBConnector.CreateRecord(content, CRATCHID++, 1, language, 
+                new SHA512Managed().ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)));
             return Ok(link);
         }
 
