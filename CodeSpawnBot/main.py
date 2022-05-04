@@ -11,7 +11,8 @@ command = 0
 @bot.message_handler(commands=['start', 'help'])
 def start(message):
     mess = f'Привет!, <b>{message.from_user.first_name} <u>{message.from_user.last_name}</u></b>\n' \
-           f'Ты можешь создать ссылку для текста и получить текст по ссылке'
+           f'Ты можешь создать ссылку для текста и получить текст по ссылке\n' \
+           f'// Работает только с текстом без спецсимволов и перевода строки('
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     content = types.KeyboardButton('/createlink')
     link = types.KeyboardButton('/getcontent')
@@ -39,12 +40,13 @@ def get_user_text(message):
     mess = "Выберите действие"
     try:
         if (command == 1):
-            request = f'{host}/content/create/{message.text}'
-            response = requests.post(request)
+            request = f'{host}/content/create/?content={message.text}'
+            response = requests.get(request)
             mess = f'{host}/content/{response.text}'
             if (response.text == ""):
                 mess = "Не удалось создать ссылку("
         elif (command == 2):
+            print(message.text)
             response = requests.get(message.text)
             mess = response.text
     except Exception as e:
