@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using code_exchanger_back.Services;
+using System.Security.Cryptography;
 
 namespace code_exchanger_back.Controllers
 {
@@ -18,10 +19,21 @@ namespace code_exchanger_back.Controllers
             this.dBConnector = dBConnector;
         }
 
-        //[HttpGet("users/{id}")]
-        //public IActionResult GetUsers(int id)
-        //{
-        //    return Ok(dBConnector.GetUser(id));
-        //}
+        [HttpGet("user/{id}")]
+        public IActionResult GetUser(int id)
+        {
+            return Ok(dBConnector.GetUserByID(id));
+        }
+
+        [HttpPost("user/create")]
+        public IActionResult CreateUser([FromQuery] string username, [FromQuery] string password)
+        {
+            if (dBConnector.GetUserByUserName(username) is not null)
+                return BadRequest("user with same username exists");
+            SHA512 hasher = new SHA512Managed();
+            dBConnector.CreateUser(dBConnector.GetAmountUsers() + 1, username, 
+                hasher.ComputeHash(System.Text.Encoding.UTF8.GetBytes("text")));
+            return Ok(dBConnector.GetUserByUserName(username));
+        }
     }
 }

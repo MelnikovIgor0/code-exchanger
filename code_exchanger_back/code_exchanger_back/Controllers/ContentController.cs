@@ -23,7 +23,7 @@ namespace code_exchanger_back.Controllers
         [HttpPost("create/{content}")]
         public IActionResult CreateRecord(string content)
         {
-            string link = dBConnector.CreateRecord(content, CRATCHID++);
+            string link = dBConnector.CreateRecord(content, CRATCHID++, 1, 0, null);
             return Ok(link);
         }
 
@@ -31,7 +31,7 @@ namespace code_exchanger_back.Controllers
         public IActionResult GetContent(string link)
         {
             Content content = dBConnector.GetContent(link);
-            return Ok(content.code);
+            return Ok(content);
         }
     }
 }
