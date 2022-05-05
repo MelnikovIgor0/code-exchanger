@@ -30,6 +30,8 @@ docker run -p 56789:80 api --add-host host.docker.internal:host-gateway?
 ```
 Тестовый POST запрос на создание контента: ```http://localhost:56789/content/create/mycontent?password=mypassword```
 
+UPD: если убрать проверку на окружение в Startup.cs ```if (env.IsDevelopment())```, то станет доступен сваггер http://localhost:56789/swagger/index.html
+
 ## Подключение базы данных к проекту
 Достаточно заменить в файле appsettings.json порт 5432 на 5433 (чтобы не было конфликта с уже развёрнутой базой данных на порте 5432). 
 
