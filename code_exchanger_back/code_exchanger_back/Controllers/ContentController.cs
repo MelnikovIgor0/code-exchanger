@@ -32,7 +32,7 @@ namespace code_exchanger_back.Controllers
                         ok = false;
                 if (!ok) return BadRequest("password contains prohibited characters");
             }
-            string link = dBConnector.CreateRecord(content, CRATCHID++, 1, language, 
+            string link = dBConnector.CreateRecord(content, CRATCHID++, 1, language,
                 new SHA512Managed().ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)));
             return Ok(link);
         }
