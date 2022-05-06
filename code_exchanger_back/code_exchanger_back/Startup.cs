@@ -50,7 +50,7 @@ namespace code_exchanger_back
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "code_exchanger_back v1"));
             //}
 
-            // app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -62,15 +62,15 @@ namespace code_exchanger_back
             });
         }
 
-        // public class ConfigrationManage
-        // {
-        //     public readonly static IConfiguration Configuration;
+        public class ConfigrationManage
+        {
+            public readonly static IConfiguration Configuration;
 
-        //     static ConfigrationManage()
-        //     {
-        //         Configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).
-        //             AddJsonFile("appsettings.json", optional: true).Build();
-        //     }
-        // }
+            static ConfigrationManage()
+            {
+                Configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).
+                    AddJsonFile("appsettings.json", optional: true).Build();
+            }
+        }
     }
 }
