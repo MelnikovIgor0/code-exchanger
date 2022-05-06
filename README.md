@@ -1,39 +1,40 @@
 # Как это запустить
-Установить [докер](https://www.docker.com/products/docker-desktop/) (саму систему и docker desktop). Да, могут возникнуть трудности, но он всё равно когда-нибудь понадобится.
+Установить [докер](https://www.docker.com/products/docker-desktop/) (саму систему и docker desktop) и склонировать репозиторий.
 
-Перейти в директорию с docker-compose.yaml и прописать
+Прописать
 ```
 docker-compose up
 ```
 После этого будет доступно 2 контейнера:
 + База данных database на порте 5433
 + Браузерная pgadmin на порте 5050
++ API на порте 5060
 
 Если возникают проблемы с конейнером бд или нужна пустая бд, то нужно удалить папку postgres_data в code_exchanger_db. Можно добавить любые .sql скрипты для создания и инициализации таблиц в папку init.
 
-## Запуск апи
-Постараюсь настроить автозапуск через docker-compose, но пока работает так. Чтобы из контейнера был доступен порт базы данных, строка подключения должна быть следующая: ```"User ID = postgres; Password = 123456; Host = host.docker.internal; Port = 5433; Database = database"```.
+## Проблема с API
+Запросы на подобие
 
-Переходим в директорию code_exchanger_back
-```
-cd code_exchanger_back
-```
+POST http://194.67.119.99:5060/content/create/mycontent?password=mypassword
 
-Создаём актуальный образ с тегом api
-```
-docker build -t api .
-```
+GET http://194.67.119.99:5060/content/49b8e45d-6bdd-4288-9b94-dffc6d12b13b
 
-Запускаем контейнер на основе образа api с магическим тегом для настройки портов
-```
-docker run -p 56789:80 api --add-host host.docker.internal:host-gateway?
-```
-Тестовый POST запрос на создание контента: ```http://localhost:56789/content/create/mycontent?password=mypassword```
+без проблем проходят через Postman, но тот же GET нельзя отправить через браузер, потому что происходит перенаправление на ненастроенный https.
 
-UPD: если убрать проверку на окружение в Startup.cs ```if (env.IsDevelopment())```, то станет доступен сваггер http://localhost:56789/swagger/index.html
+Описание ошибки:
+
+{"EventId":3,"LogLevel":"Warning","Category":"Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware","M
+essage":"Failed to determine the https port for redirect.","State":{"Message":"Failed to determine the https port for redi
+rect.","{OriginalFormat}":"Failed to determine the https port for redirect."}}
+
+Причём проект https://github.com/advasileva/MessageService без проблем развернулся на том же сервере и был доступен сваггер из браузера.
+
+Пока не придумала как решить, если есть идеи - пишите.
+
+Возможная причина - галочка настройек https при создании проекта.
 
 ## Подключение базы данных к проекту
-Достаточно заменить в файле appsettings.json порт 5432 на 5433 (чтобы не было конфликта с уже развёрнутой базой данных на порте 5432). 
+Достаточно заменить строку подключения в файле appsettings.json на ```"User ID = postgres; Password = 123456; Host = host.docker.internal; Port = 5433; Database = database"``` (выбран порт 5433, чтобы не было конфликта с уже развёрнутой базой данных на порте 5432). 
 
 Ещё вариант - сразу запустить контейнер на 5432 порте (заменить 15 строку docker-compose.yml на ```- "5432:5432"```).
 
