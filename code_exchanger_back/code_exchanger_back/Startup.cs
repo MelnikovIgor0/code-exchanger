@@ -50,7 +50,7 @@ namespace code_exchanger_back
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "code_exchanger_back v1"));
             //}
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 
