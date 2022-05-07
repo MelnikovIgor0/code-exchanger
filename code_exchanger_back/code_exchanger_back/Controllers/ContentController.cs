@@ -30,6 +30,7 @@ namespace code_exchanger_back.Controllers
                 return BadRequest("password contains prohibited characters");
             if (content_password is not null && content_password.Length > 128)
                 return BadRequest("password too long");
+            if (content is not null && content.Length > 262144) return BadRequest("your code is too big");
             string link = dBConnector.CreateRecord(content, dBConnector.GetMaxContentID() + 1, possibleUser is null ? 0 : possibleUser.ID,
                 language, PasswordFunctions.GetHash(content_password));
             return Ok(link);
@@ -60,7 +61,7 @@ namespace code_exchanger_back.Controllers
                 return BadRequest("you have no permission to delete this code");
             if (!PasswordFunctions.CheckPasswords(PasswordFunctions.GetHash(content_password), possibleContent.password))
                 return BadRequest("wrong content password");
-            dBConnector.DeleteContent(possibleContent.ID);
+            dBConnector.DeleteContent(possibleContent.link);
             return Ok();
         }
 
@@ -78,6 +79,7 @@ namespace code_exchanger_back.Controllers
                 return BadRequest("wrong content password");
             if (possibleContent.authorID == 0 || possibleContent.authorID != possibleUser.ID)
                 return BadRequest("you have no permission to change this code");
+            if (new_content is not null && new_content.Length > 262144) return BadRequest("your code is too big");
             dBConnector.UpdateRecord(link, new_content);
             return Ok();
         }

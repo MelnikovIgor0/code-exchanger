@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using System.Collections.Generic;
 using System.Data.Common;
+using code_exchanger_back.Settings;
 
 namespace code_exchanger_back.Services
 {
@@ -18,6 +19,36 @@ namespace code_exchanger_back.Services
             dbConnection = (Npgsql.NpgsqlConnection)mainDataBase.Database.GetDbConnection();
         }
 
+        private string ReadContentText(string link)
+        {
+            try
+            {
+                return System.IO.File.ReadAllText($"{Constants.ContentPath}\\{link}");
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private bool WriteContentText(string link, string content)
+        {
+            try
+            {
+                System.IO.File.WriteAllText($"{Constants.ContentPath}\\{link}", content);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void DeleteContentText(string link)
+        {
+            System.IO.File.Delete($"{Constants.ContentPath}\\{link}");
+        }
+
         public Content GetContent(string link)
         {
             string command = $"SELECT * FROM \"Content\" WHERE \"link\"='{link}'";
@@ -27,7 +58,7 @@ namespace code_exchanger_back.Services
             {
                 result = new Content()
                 {
-                    code = reader.GetString(0),
+                    code = ReadContentText(reader.GetString(0)),
                     creation_time = reader.GetProviderSpecificValue(1),
                     authorID = reader.GetInt64(2),
                     language = reader.GetByte(3),
@@ -90,7 +121,8 @@ namespace code_exchanger_back.Services
                 $"{System.DateTime.Now.Day.ToString("D2")}";
             string guid = System.Guid.NewGuid().ToString();
             string command = $"INSERT INTO \"Content\" (\"code\", \"creation_time\", \"authorID\", \"language\", \"password\", \"ID\", \"link\")" +
-                $"VALUES('{content}', '{date}', {authorID}, {language}, '{password}', {id}, '{guid}')";
+                $"VALUES('{guid}', '{date}', {authorID}, {language}, '{password}', {id}, '{guid}')";
+            WriteContentText(guid, content);
             var reader = (new NpgsqlCommand(command, dbConnection)).ExecuteReader();
             reader.Close();
             return guid;
@@ -108,6 +140,11 @@ namespace code_exchanger_back.Services
             string command = "SELECT MAX(\"ID\") FROM \"Users\"";
             var reader = (new NpgsqlCommand(command, dbConnection)).ExecuteReader();
             reader.Read();
+            if (reader.IsDBNull(0))
+            {
+                reader.Close();
+                return 0;
+            }
             int result = reader.GetInt32(0);
             reader.Close();
             return result;
@@ -122,7 +159,7 @@ namespace code_exchanger_back.Services
             {
                 result.Add(new Content()
                 {
-                    code = reader.GetString(0),
+                    code = ReadContentText(reader.GetString(0)),
                     creation_time = reader.GetProviderSpecificValue(1),
                     authorID = reader.GetInt64(2),
                     language = reader.GetByte(3),
@@ -135,9 +172,10 @@ namespace code_exchanger_back.Services
             return result.ToArray();
         }
 
-        public void DeleteContent(long id)
+        public void DeleteContent(string link)
         {
-            string command = $"DELETE FROM \"Content\" WHERE \"ID\" = {id}";
+            DeleteContentText(link);
+            string command = $"DELETE FROM \"Content\" WHERE \"link\" = {link}";
             var reader = (new NpgsqlCommand(command, dbConnection)).ExecuteReader();
             while (reader.Read());
             reader.Close();
@@ -163,7 +201,8 @@ namespace code_exchanger_back.Services
             string date = $"{System.DateTime.Now.Year.ToString("D4")}-" +
                 $"{System.DateTime.Now.Month.ToString("D2")}-" +
                 $"{System.DateTime.Now.Day.ToString("D2")}";
-            string command = $"UPDATE \"Content\" SET \"code\" = '{new_content}', \"creation_time\"='{date}' WHERE \"link\" = '{link}'";
+            WriteContentText(link, new_content);
+            string command = $"UPDATE \"Content\" SET \"creation_time\"='{date}' WHERE \"link\" = '{link}'";
             var reader = (new NpgsqlCommand(command, dbConnection)).ExecuteReader();
             while (reader.Read());
             reader.Close();
@@ -179,6 +218,7 @@ namespace code_exchanger_back.Services
 
         public void DeleteContentByAuthor(long authorId)
         {
+            foreach (Content c in GetContentByUserID(authorId)) DeleteContentText(c.link);
             string command = $"DELETE FROM \"Content\" WHERE \"authorID\" = {authorId}";
             var reader = (new NpgsqlCommand(command, dbConnection)).ExecuteReader();
             while (reader.Read());
