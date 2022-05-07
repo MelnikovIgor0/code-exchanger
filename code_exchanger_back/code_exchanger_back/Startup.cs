@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System.Configuration;
 using code_exchanger_back.Services;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace code_exchanger_back
 {
@@ -33,6 +34,11 @@ namespace code_exchanger_back
         {
 
             services.AddControllers();
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders =
+                    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "code_exchanger_back", Version = "v1" });
@@ -43,12 +49,13 @@ namespace code_exchanger_back
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //if (env.IsDevelopment())
-            //{
+            app.UseForwardedHeaders();
+            if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "code_exchanger_back v1"));
-            //}
+            }
 
             app.UseHttpsRedirection();
 
