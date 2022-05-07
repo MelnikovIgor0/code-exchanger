@@ -13,35 +13,71 @@ namespace code_exchanger_back.Controllers
     public class ContentController : Controller
     {
         private DBConnector dBConnector;
-        private int CRATCHID = 10;
-
 
         public ContentController(DBConnector dBConnector)
         {
             this.dBConnector = dBConnector;
         }
 
-        [HttpPost("create/{content}")]
-        public IActionResult CreateRecord(string content, [FromQuery] short language, [FromQuery] string password)
+        [HttpPost("")]
+        public IActionResult CreateRecord([FromQuery] string content, [FromQuery] short language, 
+            [FromQuery] string username = null, [FromQuery] string user_password = null, [FromQuery] string content_password = null)
         {
-            if (password is not null)
-            {
-                bool ok = true;
-                foreach (char c in password)
-                    if (!(c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z' || c >= '0' && c <= '9'))
-                        ok = false;
-                if (!ok) return BadRequest("password contains prohibited characters");
-            }
-            string link = dBConnector.CreateRecord(content, CRATCHID++, 1, language, 
-                new SHA512Managed().ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)));
+            User possibleUser = dBConnector.GetUserByUserName(username);
+            if (possibleUser is not null && !PasswordFunctions.CheckPasswords(possibleUser.password, PasswordFunctions.GetHash(user_password)))
+                return BadRequest("wrong user password");
+            if (content_password != "" && !PasswordFunctions.CheckString(content_password)) 
+                return BadRequest("password contains prohibited characters");
+            string link = dBConnector.CreateRecord(content, dBConnector.GetMaxContentID() + 1, possibleUser is null ? 0 : possibleUser.ID,
+                language, PasswordFunctions.GetHash(content_password));
             return Ok(link);
         }
 
-        [HttpGet("{link}")]
-        public IActionResult GetContent(string link)
+        [HttpGet("")]
+        public IActionResult GetContent([FromQuery] string link, [FromQuery] string password = null)
         {
             Content content = dBConnector.GetContent(link);
+            if (content is null) return NotFound("there's no code");
+            if (!PasswordFunctions.CheckPasswords(PasswordFunctions.GetHash(password), content.password))
+                return BadRequest("wrong content password");
             return Ok(content);
+        }
+
+        [HttpDelete("")]
+        public IActionResult DeleteContent([FromQuery] string link, [FromQuery] string username, 
+            [FromQuery] string user_password, [FromQuery] string content_password = null)
+        {
+            Content possibleContent = dBConnector.GetContent(link);
+            if (possibleContent is null) return NotFound("there's no code");
+            if (username is null) return BadRequest("you have no permission to delete this code");
+            User possibleUser = dBConnector.GetUserByUserName(username);
+            if (possibleUser is null) return BadRequest("user with this login does not exist");
+            if (!PasswordFunctions.CheckPasswords(possibleUser.password, PasswordFunctions.GetHash(user_password)))
+                return BadRequest("wrong user password");
+            if (possibleContent.authorID == 0 ||  possibleContent.authorID != possibleUser.ID) 
+                return BadRequest("you have no permission to delete this code");
+            if (!PasswordFunctions.CheckPasswords(PasswordFunctions.GetHash(content_password), possibleContent.password))
+                return BadRequest("wrong content password");
+            dBConnector.DeleteContent(possibleContent.ID);
+            return Ok();
+        }
+
+        [HttpPut("")]
+        public IActionResult UpdateContent([FromQuery] string link, [FromQuery] string new_content, [FromQuery] string username, 
+            [FromQuery] string user_password, [FromQuery] string content_password = null)
+        {
+            User possibleUser = dBConnector.GetUserByUserName(username);
+            if (possibleUser is null) return BadRequest("you have no permission to change this code");
+            if (!PasswordFunctions.CheckPasswords(possibleUser.password, PasswordFunctions.GetHash(user_password)))
+                return BadRequest("wrong user password");
+            Content possibleContent = dBConnector.GetContent(link);
+            if (possibleContent is null) return NotFound("there's no code");
+            if (!PasswordFunctions.CheckPasswords(PasswordFunctions.GetHash(content_password), possibleContent.password))
+                return BadRequest("wrong content password");
+            if (possibleContent.authorID == 0 || possibleContent.authorID != possibleUser.ID)
+                return BadRequest("you have no permission to change this code");
+            dBConnector.UpdateRecord(link, new_content);
+            return Ok();
         }
     }
 }

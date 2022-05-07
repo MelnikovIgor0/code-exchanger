@@ -13,6 +13,6 @@ namespace code_exchanger_back.Models
 
         public string username { get; set; }
 
-        public byte[] password { get; set; }
+        public string password { get; set; }
     }
 }
