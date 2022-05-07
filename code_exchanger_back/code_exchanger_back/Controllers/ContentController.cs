@@ -28,6 +28,8 @@ namespace code_exchanger_back.Controllers
                 return BadRequest("wrong user password");
             if (content_password != "" && !PasswordFunctions.CheckString(content_password)) 
                 return BadRequest("password contains prohibited characters");
+            if (content_password is not null && content_password.Length > 128)
+                return BadRequest("password too long");
             string link = dBConnector.CreateRecord(content, dBConnector.GetMaxContentID() + 1, possibleUser is null ? 0 : possibleUser.ID,
                 language, PasswordFunctions.GetHash(content_password));
             return Ok(link);

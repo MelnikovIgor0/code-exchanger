@@ -105,7 +105,7 @@ namespace code_exchanger_back.Services
 
         public int GetAmountUsers()
         {
-            string command = "SELECT COUNT(*) FROM \"Users\"";
+            string command = "SELECT MAX(\"ID\") FROM \"Users\"";
             var reader = (new NpgsqlCommand(command, dbConnection)).ExecuteReader();
             reader.Read();
             int result = reader.GetInt32(0);
@@ -164,6 +164,30 @@ namespace code_exchanger_back.Services
                 $"{System.DateTime.Now.Month.ToString("D2")}-" +
                 $"{System.DateTime.Now.Day.ToString("D2")}";
             string command = $"UPDATE \"Content\" SET \"code\" = '{new_content}', \"creation_time\"='{date}' WHERE \"link\" = '{link}'";
+            var reader = (new NpgsqlCommand(command, dbConnection)).ExecuteReader();
+            while (reader.Read());
+            reader.Close();
+        }
+
+        public void DeleteUser(string username)
+        {
+            string command = $"DELETE FROM \"Users\" WHERE \"username\" = '{username}'";
+            var reader = (new NpgsqlCommand(command, dbConnection)).ExecuteReader();
+            while (reader.Read());
+            reader.Close();
+        }
+
+        public void DeleteContentByAuthor(long authorId)
+        {
+            string command = $"DELETE FROM \"Content\" WHERE \"authorID\" = {authorId}";
+            var reader = (new NpgsqlCommand(command, dbConnection)).ExecuteReader();
+            while (reader.Read());
+            reader.Close();
+        }
+
+        public void UpdatePassword(string username, string password)
+        {
+            string command = $"UPDATE \"Users\" SET \"password\" = '{password}' WHERE \"username\" = '{username}'";
             var reader = (new NpgsqlCommand(command, dbConnection)).ExecuteReader();
             while (reader.Read());
             reader.Close();
