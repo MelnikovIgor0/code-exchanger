@@ -5,6 +5,6 @@
         /// <summary>
         /// Enter here folder where will be placed created by users content.
         /// </summary>
-        public static string ContentPath = "";
+        public const string ContentPath = "";
     }
 }
