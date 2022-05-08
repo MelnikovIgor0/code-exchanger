@@ -2,6 +2,7 @@
 using code_exchanger_back.Models;
 using static code_exchanger_back.Startup;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace code_exchanger_back.Models
 {
@@ -18,7 +19,10 @@ namespace code_exchanger_back.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(ConfigrationManage.Configuration.GetConnectionString("PostgreSql"));
+            optionsBuilder.UseNpgsql(ConfigrationManage.Configuration.GetConnectionString("PostgreSql"), builder =>
+                {
+                    builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+                });
         }
     }
 }
