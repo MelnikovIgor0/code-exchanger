@@ -27,11 +27,15 @@ namespace code_exchanger_back
         }
 
         public IConfiguration Configuration { get; }
+        private DBConnector dBConnector = new DBConnector();
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            System.Threading.Timer deleteOldContentTimer = new System.Threading.Timer((object _) => 
+            {
+                dBConnector.DeleteOldContent(System.DateTime.Now.AddDays(-Settings.Constants.LifeTimeOfContent));
+            }, null, 5000, 5000);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

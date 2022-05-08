@@ -269,5 +269,16 @@ namespace code_exchanger_back.Services
                 reader.Close();
             }
         }
+
+        public void DeleteOldContent(System.DateTime border)
+        {
+            string command = $"DELETE FROM \"Content\" WHERE \"creation_time\" <= '{ParseDate(border)}'";
+            lock (dbConnection)
+            {
+                var reader = (new NpgsqlCommand(command, dbConnection)).ExecuteReader();
+                while (reader.Read());
+                reader.Close();
+            }
+        }
     }
 }
