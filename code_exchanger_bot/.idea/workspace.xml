@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a42a929e-42bc-42d4-8681-9b5ef75e5f65" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger.sln" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/Pages/Error.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/Pages/Error.cshtml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/Pages/Index.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/Pages/Index.cshtml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/Pages/Privacy.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/Pages/Privacy.cshtml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/Pages/Shared/_Layout.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/Pages/Shared/_ValidationScriptsPartial.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/Pages/_ViewImports.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/Pages/_ViewStart.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/Properties/launchSettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/Startup.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/appsettings.Development.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/appsettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/code_exchanger.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/css/site.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/js/site.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/jquery-validation/LICENSE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/jquery-validation/dist/additional-methods.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/jquery-validation/dist/additional-methods.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/jquery-validation/dist/jquery.validate.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/jquery/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/jquery/dist/jquery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/jquery/dist/jquery.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger/code_exchanger/wwwroot/lib/jquery/dist/jquery.min.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger_back/code_exchanger_back.sln" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger_back/code_exchanger_back/Controllers/ContentController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger_back/code_exchanger_back/Controllers/UserController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger_back/code_exchanger_back/Models/ConfigSettings.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger_back/code_exchanger_back/Models/Content.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger_back/code_exchanger_back/Models/DataBaseContext.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger_back/code_exchanger_back/Models/Users.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger_back/code_exchanger_back/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger_back/code_exchanger_back/Properties/launchSettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger_back/code_exchanger_back/Services/DBConnector.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger_back/code_exchanger_back/Startup.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger_back/code_exchanger_back/appsettings.Development.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger_back/code_exchanger_back/appsettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code_exchanger_back/code_exchanger_back/code_exchanger_back.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="28t9JSsREfZrZzlBm6JW3bOUEAU" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="code_exchanger_bot" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a42a929e-42bc-42d4-8681-9b5ef75e5f65" name="Changes" comment="" />
+      <created>1652024942777</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1652024942777</updated>
+    </task>
+    <servers />
+  </component>
+</project>
