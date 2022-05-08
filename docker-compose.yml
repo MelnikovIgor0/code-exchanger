@@ -1,0 +1,34 @@
+version: '3.3'
+
+services:
+  db:
+    container_name: pg_db
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: database
+    volumes:
+      - ./code_exchanger_db/postgres_data:/var/lib/postgresql/data
+      - ./code_exchanger_db/init:/docker-entrypoint-initdb.d
+    ports:
+      - "5434:5432"
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: noemail@noemail.com
+      PGADMIN_DEFAULT_PASSWORD: 123456
+    ports:
+      - "5050:80"
+
+  api:
+    container_name: api
+    build: 
+      context: ./code_exchanger_back
+      dockerfile: ./Dockerfile
+    ports:
+      - "5062:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
