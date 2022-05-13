@@ -18,7 +18,7 @@ namespace code_exchanger_back.Models
 
         public byte language { get; set; }
 
-        public byte[] password { get; set; }
+        public string password { get; set; }
 
         [Key]
         public long ID { get; set; }

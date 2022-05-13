@@ -19,4 +19,4 @@ RUN dotnet publish "code_exchanger_back.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "code_exchanger_back.dll", "--server.urls", "http://0.0.0.0:5000"]
+ENTRYPOINT ["dotnet", "code_exchanger_back.dll"]
