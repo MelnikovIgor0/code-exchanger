@@ -4,6 +4,7 @@ services:
   db:
     container_name: pg_db
     image: postgres:14-alpine
+    restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456
@@ -17,6 +18,7 @@ services:
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
+    restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: noemail@noemail.com
       PGADMIN_DEFAULT_PASSWORD: 123456
@@ -25,6 +27,7 @@ services:
 
   api:
     container_name: api
+    restart: always
     build: 
       context: ./code_exchanger_back
       dockerfile: ./Dockerfile
@@ -36,3 +39,4 @@ services:
   bot:
     container_name: bot
     image: advasileva/codespawnbot
+    restart: always
