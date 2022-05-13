@@ -39,3 +39,4 @@ services:
   bot:
     container_name: bot
     image: advasileva/codespawnbot
+    restart: always
